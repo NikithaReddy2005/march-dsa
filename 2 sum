@@ -1,0 +1,37 @@
+#### BRUTE FROCE APPORACH
+class Solution(object):
+    def twoSum(self, nums, target):
+        n = len(nums)                               #T.C: O(N^2)
+        for i in range(0,n-1):                      # S.C:O(1)
+            for j in range(i+1,n):
+                if (nums[i]+nums[j] == target):
+                    return[i,j]
+--------------------------------------------------------------------------------------------------------------                
+##### TWO POINTER APPROACH
+class Solution(object):
+    def twoSum(self, nums, target):
+        nums.sort()
+        n = len(nums)
+        i=0                                         #T.C : O(N LogN)
+        j=n-1                                       # S.C: O(1)
+        while(i<=j):
+            if (nums[i]+nums[j] > target):
+                j=j-1
+            elif (nums[i]+nums[j]== target):
+                return[i,j]
+            else:
+                i = i+1
+""" here in the above program I have tried to use two pointer apporach but it does not satisfy  my testcases  because  in the question they
+are asking to return the indexes of the numbers whose sum is equal to target.we are sorting the array so that indexes will be changed and there the test cases are failing.
+If they are asking to return the numbers this apporoach can be used"""
+------------------------------------------------------------------------------------------------------------------
+#### HASHMAP APPORACH
+class Solution(object):
+    def twoSum(self, nums, target):
+        d={}
+        for i in range(0,len(nums)):
+            b = target -nums[i]                      #T.C=O(N)      ......Optimal solution
+            if (b in d):                             #S.C=O(N)      ......As HASHMAP is used
+                return[i,d[b]]
+            else:
+                d[nums[i]]=i
