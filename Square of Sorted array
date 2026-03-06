@@ -1,0 +1,15 @@
+#Brute force apporach
+class Solution(object):
+    def sortedSquares(self, nums):
+        n=len(nums)
+        for i in range(0,n):                           #T.C:O(N Log N)
+            nums[i]=nums[i]*nums[i]                    #S.C:O(1)
+        nums.sort()
+        return nums
+
+Here in the above problem we have used a for loop ..> T.C:O(N)
+and sort() method whose....>T.C:O(N LogN)
+Over all T.C:O(N)+O(N LogN)==>O(N Log N)
+---------------------------------------------------------------------------------------------------
+
+# TWO POINTER APPORACH
