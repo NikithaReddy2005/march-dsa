@@ -1,0 +1,8 @@
+#length of last word
+class Solution(object):
+    def lengthOfLastWord(self, s):              #T.C:O(N)
+        words = s.strip().split()               #S.C:O(N)
+        return len(words[-1])
+ here strip() removes spaces from the beginning and end of the string. ex= s=" hello world  "   // s.strip()="hello world"
+split() converts the sentence into a list of words=s.strip().split() ..>words=["hello" ,"world"]
+words is a list and -1 means last element of the list. words[-1]..>"world"//// len(words[-1])= 5
