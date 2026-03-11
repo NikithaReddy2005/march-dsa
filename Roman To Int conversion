@@ -1,0 +1,22 @@
+#roman to integer conversion
+# brute force apporach
+class Solution(object):
+    def romanToInt(self, s):
+        values={
+            'I':1,                          T.C:O(N) WHERE N = LEN(s)
+            'V':5,                          S.C:O(1)
+            'X':10,
+            'L':50,
+            'C':100,
+            'D':500,
+            'M':1000
+        }
+        ans=0
+        for i in range(len(s)):
+            if (i <len(s) -1 and values[s[i]] < values[s[i+1]]):
+                ans -= values[s[i]]
+            else:
+                ans += values[s[i]]
+        return ans
+(i <len(s) -1 and values[s[i]] < values[s[i+1]])::> this condition tells us that current val is less than the next val then subtract
+ ans -= values[s[i]] ::>i.e IX implies I=1<X=10 then 10 - 1 =9
