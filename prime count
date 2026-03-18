@@ -1,0 +1,39 @@
+# prime count-BRUTE FORCE APPORACH
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        def isprime(n):
+            cnt=0                                    #T.C=O(N**2)
+            for i  in range(1,n+1):
+                if(n%i==0):
+                    cnt+=1
+            return cnt
+        count=0
+        for i in range(2,n):
+            if(isprime(i)==2):
+                count+=1
+        return count
+        
+  HERE is the brute force apporach the thing is we are using 2 loops 
+  in line 11 for loop is used to check number of primes less than n
+  again a function call is made with in the loop that isprime(n) ..>this func is used to check the number is prime or not
+
+--------------------------------------------------------------------------------------------------------------------------
+#optimal apporach -Sieve of Eratosthenes 
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        arr=[1]*n
+        cnt=0                                   #T.C: O(N log logN)
+        for i in range(2,n):                    #S.C: O(N)
+            if(arr[i]==1):
+                cnt+=1
+                for j in range(i*i,n,i):       # only makes it as multiples if and only if the number is prime here because non prime number multiples are already made 0 by their smaller numbers
+                    arr[j]=0
+        return cnt
+
+EXPLAINATION of line 29:multiples of 4 are already been 0 before while runing multiples of 2 so unneccessaryly why to cal again that is the reason we checking line no 27
+and line 27 runs  n log log n times
+n/2 + n/3 + n/5 + n/7 + ...
+1/2 + 1/3 + 1/5 + 1/7 + ... ≈ log(log n)
+#T.C: O(N log logN)
+        
+        
