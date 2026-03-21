@@ -14,3 +14,27 @@ class Solution(object):
         return ans
 
 inorder to handle duplicates we are using sort() method so that triplet is sorted and we check that triplet is present in the ans or not
+------------------------------------------------------------------------------------------------------------------------------------------------------
+#oprimal apporach
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:                                        #T.C:O(N^2)
+                total = nums[i] + nums[j] + nums[k]             #S.C:O(N)
+                if total > 0:
+                    k -= 1
+                elif total < 0:
+                    j += 1
+                else:
+                    res.append([nums[i], nums[j], nums[k]])
+                    j += 1
+
+                    while nums[j] == nums[j-1] and j < k:
+                        j += 1 
+        return res
