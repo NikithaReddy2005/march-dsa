@@ -1,0 +1,41 @@
+class Disjoint:  
+    def __init__(self,V):
+        self.rank = [0]*V
+        self.parent = [i for i in range(0,V)]
+    def findUparent(self,node):           #path compression
+        if(node == self.parent[node]):
+            return node
+        self.parent[node] = self.findUparent(self.parent[node])
+        return self.parent[node]
+    def findParent(self,u,v):        #exists in same  component or not
+        return self.findUparent(u) == self.findUparent(v) 
+    def unionByRank(self,u,v):       #connection b/w two nodes
+        ultimateParentOfU = self.findUparent(u)
+        ultimateParentOfV = self.findUparent(v) 
+        if(ultimateParentOfV == ultimateParentOfU):
+            return
+        if(self.rank[ultimateParentOfU]<self.rank[ultimateParentOfV]):
+            self.parent[ultimateParentOfU] = ultimateParentOfV 
+        elif(self.rank[ultimateParentOfV]<self.rank[ultimateParentOfU]):
+            self.parent[ultimateParentOfV] = ultimateParentOfU
+        elif(self.rank[ultimateParentOfU] == self.rank[ultimateParentOfV]):
+            self.parent[ultimateParentOfV] = ultimateParentOfU
+            self.rank[ultimateParentOfU]+=1 
+ds = Disjoint(7) 
+ds.unionByRank(1,2)
+ds.unionByRank(2,3) 
+if(ds.findParent(2,3)): 
+    print(True)
+else:
+    print(False)
+ds.unionByRank(4,5)
+if(ds.findParent(2,5)):
+    print(True)
+else:
+    print(False)
+
+____________________________________________________________________________
+#rules for disjoint set:
+1.find ultimate parent u,v
+2.find rank of ultimate parent
+3.connect smaller rank with larger rank(connect with ultimate parent)
